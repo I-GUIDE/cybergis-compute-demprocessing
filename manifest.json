@@ -1,0 +1,36 @@
+{
+    "name": "Watershed DEM Processing",
+    "container": "demprocessing",
+    "description": "Accepts a site_id and resolution and generates a DEM raster for the watershed",
+    "execution_stage": "./main.sh",
+    "slurm_input_rules": {
+   
+           "time": {
+                "max": 60,
+                "min": 10,
+                "default_value": 10,
+                "step": 10,
+                "unit": "Minutes"   
+            },
+            "cpu_per_task": {
+                "max": 128,
+                "min": 16,
+                "default_value": 16,
+                "step": 16
+            }
+    },
+    "param_rules": {
+        "site_id": {
+            "type": "string_input",
+            "require": true,
+            "default_value": "09241000"
+        },
+        "resolution": {
+            "type": "string_input",
+            "require": true,
+            "default_value": "13"
+        }
+    },
+    "supported_hpc": ["anvil_community"],
+    "default_hpc": "anvil_community"
+}
