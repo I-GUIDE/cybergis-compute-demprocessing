@@ -1,3 +1,3 @@
 #!/bin/bash
 
-python3 /usr/local/bin/DEMProcessing.py
+python3 /job/executable/DEMProcessing.py
