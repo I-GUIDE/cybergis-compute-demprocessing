@@ -175,10 +175,10 @@ for lon in range(extent[0],extent[2]):
         polygons.append({'geometry': polygon, 'lat': lat+1, 'lon': abs(lon)})
         #lat+1 is used as the top left corner is used as the identifier of DEM tile to be downloaded.
 
-gdf=gpd.GeoDataFrame(polygons,crs="EPSG:4326")
+gdf=geopandas.GeoDataFrame(polygons,crs="EPSG:4326")
 
 # Perform the intersection
-intersection = gpd.overlay(gdf,watershed, how='intersection')
+intersection = geopandas.overlay(gdf,watershed, how='intersection')
 
 ## Select all columns except geometry
 #del attributes_intersect
@@ -210,11 +210,11 @@ for thread in threads:
 ## Step 2: Merge the downloaded rasters
 num_tiles_download = len(overlap_lonlat)
 if num_tiles_download==1:
-    merged_raster_filename=f'{folder_input}/USGS_{resolution}_{usgs_filename}.tif'
+    merged_raster_filename=f'{dem_files_store}/USGS_{resolution}_{usgs_filename}.tif'
     print("No need to merge as only one tiff file")
 else:
     merged_raster_filename=f'{folder_input}/merged_{resolution}_{site_id}.tif'
-    merge_dem_raster_func(folder_input, merged_raster_filename)
+    merge_dem_raster_func(dem_files_store, merged_raster_filename)
 
 ## Step 3: Reproject merged raster to watershed CRS
 target_crs = watershed.estimate_utm_crs(datum_name='WGS 84')
