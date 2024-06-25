@@ -43,7 +43,7 @@ def download_dem_file_func(usgs_filename, local_fileloc_filename):
         local_fileloc_filename)
         print(f"Completed file download and saved to {local_fileloc_filename}")
     except Exception as e_value:
-        print(f"Error downloading {url}: {e_value}")
+        print(f"Error downloading {usgs_filename}.tif: {e_value}")
 
 def merge_dem_raster_func(input_foldername, output_filename):
     ## Get a list of all DEM files in the input folder
